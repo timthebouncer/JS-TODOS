@@ -1,0 +1,60 @@
+<html>
+<head>
+    <link rel=stylesheet type="text/css" href="App.css">
+</head>
+<body>
+<div class="container">
+    <div class="tabs-wrapper">
+        <div class="tab-btn"></div>
+    </div>
+    <div class="table-wrapper">
+        <div class="table-wrapper-operation">
+            <div class="label-wrapper">標籤
+                <select>
+                    <option>1</option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" id="name" placeholder="請輸入代辦名稱">
+            </div>
+            <div class="submit-btn">
+                <button id="submit-btn">送出</button>
+            </div>
+        </div>
+        <div class="table-wrapper-content">
+            <table class="table-wrapper-content-table">
+                <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        名稱
+                    </th>
+                    <th>
+                        創建時間
+                    </th>
+                    <th>
+                        完成時間
+                    </th>
+                    <th style="width: 150px">
+                        操作
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="content-list">
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-wrapper">
+            <button> < </button>
+            <button> > </button>
+            <select>
+                <option>10筆/頁</option>
+            </select>
+        </div>
+    </div>
+</div>
+<script src="view/index.js"></script>
+</body>
+</html>

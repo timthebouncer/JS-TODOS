@@ -1,0 +1,38 @@
+.container{
+    margin: 30 auto;
+    width: 40%;
+}
+.tabs-wrapper{
+}
+.table-wrapper{
+    height: 400px;
+    width: 100%;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.table-wrapper-operation{
+    display: flex;
+    padding: 10px;
+    justify-content: space-evenly;
+    width: 350px;
+}
+.table-wrapper-content{
+    display: flex;
+    justify-content: center;
+    height: 85%;
+}
+.table-wrapper-content-table{
+    margin-top: 30px;
+    width: 95%;
+    text-align: center;
+    border-spacing: 0px;
+}
+.pagination-wrapper{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/*# sourceMappingURL=/App.03fbd8d8.css.map */
