@@ -118,43 +118,239 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"view/index.js":[function(require,module,exports) {
-var tabButton = [{
-  tabName: "待處理",
-  id: 1
-}, {
-  tabName: "封存",
-  id: 2
-}, {
-  tabName: "已完成",
-  id: 3
-}];
-var el = document.querySelector('.tab-btn');
-el.innerHTML += tabButton.map(function (x) {
-  return "<button>".concat(x.tabName, "</button>");
-}).join('');
-var data = [];
-document.getElementById('submit-btn').addEventListener('click', addData);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-function addData(e) {
-  e.preventDefault();
-  var input = document.getElementById('name').value;
-  var todo = {
-    id: 1,
-    name: input,
-    createTime: 1111,
-    completeTime: 2222
-  };
-  data.push(todo);
-  aaa();
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function formatDate(d) {
+  var HH = d.getHours() + '';
+  var mm = d.getMinutes() + '';
+  var ss = d.getSeconds() + '';
+  return HH.padStart(2, '0') + ":" + mm.padStart(2, '0') + ":" + ss.padStart(2, '0');
 }
 
-function aaa() {
-  var tableData = data.map(function (value) {
-    return "<tr>\n    <td>".concat(value.id, "</td>\n    <td>").concat(value.name, "</td>\n    <td>").concat(value.createTime, "</td>\n    <td>").concat(value.completeTime, "</td>\n    <td><button class=\"fancy-btn\">\u7DE8\u8F2F</>\n    <button class=\"fancy-btn\">\u5B8C\u6210</>\n    <button class=\"fancy-btn\">\u522A\u9664</></td>\n</tr>");
+;
+
+(function () {
+  var tabButton = [{
+    tabName: "待處理",
+    id: 1
+  }, {
+    tabName: "封存",
+    id: 2
+  }, {
+    tabName: "已完成",
+    id: 3
+  }];
+  var el = document.querySelector('.tab-btn-wrapper');
+  el.innerHTML += tabButton.map(function (x) {
+    return "<button class=\"tab-btn\">".concat(x.tabName, "</button>");
   }).join('');
-  var els = document.querySelector(".content-list");
-  els.innerHTML = tableData;
-}
+  el.addEventListener('click', function (ev) {
+    var i = _toConsumableArray(el.children).findIndex(function (e) {
+      return e === ev.target;
+    });
+
+    switch (i) {
+      case 0:
+        document.querySelector('.table-wrapper-operation').classList.remove('vanish');
+        Todo(data.filter(function (item) {
+          return item.status === true && item.finish === false;
+        }));
+        break;
+
+      case 1:
+        document.querySelector('.table-wrapper-operation').classList.add('vanish');
+        Todo(data.filter(function (item) {
+          return item.status === false;
+        }));
+        console.log(data, 323);
+        break;
+
+      case 2:
+        document.querySelector('.table-wrapper-operation').classList.add('vanish');
+        Todo(data.filter(function (item) {
+          return item.finish === true && item.status === true;
+        }));
+        break;
+    }
+  });
+  var data = [];
+  var archive = [];
+  var id = 1; ////新增
+
+  document.getElementById('submit-btn').addEventListener('click', addData);
+
+  function addData(e) {
+    e.preventDefault();
+    var input = document.getElementById('name').value;
+
+    if (input === "") {
+      alert("請輸入代辦事項");
+    } else {
+      var todo = {
+        id: id++,
+        name: input,
+        createTime: new Date(),
+        completeTime: 2222,
+        status: true,
+        finish: false
+      };
+      data.push(todo);
+      Todo(data.filter(function (item) {
+        return item.status === true && item.finish === false;
+      }));
+      document.getElementById('name').value = "";
+    }
+  }
+
+  function Todo(data) {
+    var els = document.querySelector(".content-list"); //切片(緩存---性能較好)
+
+    var fragment = document.createDocumentFragment();
+    data.forEach(function (value, index) {
+      var tr = document.createElement('tr');
+      tr.classList.add('table-content');
+      tr.innerHTML = "<td>".concat(value.id, "</td>\n          <td class=\"editName\">").concat(value.name, "</td>\n          <td>").concat(formatDate(value.createTime), "</td>\n          <td>").concat(value.completeTime, "</td>\n          <td>\n          <button class=\"edit-btn\">\u7DE8\u8F2F</>\n          <button class=\"complete-btn\">\u5B8C\u6210</>\n          <button class=\"deleteBtn\">\u522A\u9664</>\n          </td>"); //編輯
+
+      tr.querySelector('.edit-btn').addEventListener('click', editData);
+
+      function editData() {
+        var edit = tr.querySelector('.editName').innerHTML = "<input class='enter' />";
+
+        if (edit) {
+          tr.querySelector('.enter').addEventListener('keydown', function (e) {
+            if (e.key === "Enter") {
+              tr.querySelector('.editName').innerHTML = "<td class='editName' />";
+              tr.querySelector('.editName').innerText = e.target.value;
+            }
+          });
+        }
+      } //完成
+
+
+      tr.querySelector('.complete-btn').addEventListener('click', completeBtn);
+
+      function completeBtn() {
+        tr.classList.add('finishLine');
+        data.map(function (item) {
+          return item.finish = true;
+        });
+      } //封存
+
+
+      tr.querySelector('.deleteBtn').addEventListener('click', function (e) {
+        var deleteId = data.findIndex(function (item) {
+          return item.id === value.id;
+        });
+
+        if (~deleteId) {
+          data.map(function (item) {
+            item.status = false;
+          });
+          els.removeChild(tr);
+        } // data = [...data]
+
+      }); //刪除
+      // tr.querySelector('.deleteBtn').addEventListener('click', (e) => {
+      //
+      //   els.removeChild(tr)
+      //   let deleteId = data.findIndex(item=>{
+      //     return item.id === value.id
+      //   })
+      //   if(~deleteId){
+      //     data.splice(deleteId,1)
+      //   }
+      // })
+
+      fragment.append(tr);
+    });
+    els.innerHTML = "";
+    els.append(fragment);
+  }
+})(); //Frank解法
+// (() => {
+//   let tabButton = [{
+//     tabName: "待處理", id: 1
+//   },
+//     {
+//       tabName: "封存", id: 2
+//     },
+//     {
+//       tabName: "已完成", id: 3
+//     }]
+//
+//   let el = document.querySelector('.tab-btn');
+//   el.innerHTML += tabButton.map(x => `<button>${x.tabName}</button>`).join('')
+//
+//
+//   let data = []
+// ////新增
+//   document.getElementById('submit-btn').addEventListener('click', addData);
+//
+//   function addData(e) {
+//     e.preventDefault()
+//     let input = document.getElementById('name').value
+//     let todo = {
+//       id: 1,
+//       name: input,
+//       createTime: 1111,
+//       completeTime: 2222
+//     };
+//     data.push(todo)
+//     aaa()
+//     document.getElementById('name').value = ""
+//   }
+//
+//   function aaa() {
+//     const els = document.querySelector(".content-list");
+//     //切片(緩存---性能較好)
+//     const fragment = document.createDocumentFragment()
+//     data.forEach((value, index) => {
+//       const random = Math.random()
+//       return ((i, r) => {
+//         const tr = document.createElement('tr')
+//         tr.innerHTML =
+//           `<td>${value.id}</td>
+//             <td>${value.name}</td>
+//             <td>${value.createTime}</td>
+//             <td>${value.completeTime}</td>
+//             <td>
+//             <button class="edit-btn">編輯</>
+//             <button class="complete-btn">完成</>
+//             <button class="deleteBtn">刪除</>
+//             </td>`
+//         console.log(value._r)
+//         value._r = r
+//         ////刪除
+//         tr.querySelector('.deleteBtn').addEventListener('click', () => {
+//           els.removeChild(tr)
+//           data.splice(data.findIndex(e => e._r === r), 1)
+//         })
+//         fragment.append(tr)
+//       })(index, random)
+//     })
+//     els.innerHTML = "";
+//     els.append(fragment)
+//   }
+// })()
+//另一種寫法
+// const item = e.target
+// if(item.classList[0] === 'deleteBtn' ){
+//   const todo = item.parentElement;
+//   todo.classList.add('fall')
+//   addEventListener('transitionend',function (){
+//     todo.remove()
+//   })
+// }
 },{}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -183,7 +379,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55585" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54564" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
