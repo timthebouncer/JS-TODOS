@@ -6,6 +6,13 @@ function formatDate(d){
   return HH.padStart(2, '0') + ":" + mm.padStart(2, '0') + ":" + ss.padStart(2, '0');
 }
 
+function hideButton(){
+  const editBtn = document.querySelectorAll('.edit-btn')
+  editBtn.forEach(item=>item.classList.add('vanish'))
+  const completeBtn = document.querySelectorAll('.complete-btn')
+  completeBtn.forEach(item=>item.classList.add('vanish'))
+}
+
 ;(() => {
   let tabButton = [{
     tabName: "待處理", id: 1
@@ -31,23 +38,52 @@ function formatDate(d){
       case 1:
         document.querySelector('.table-wrapper-operation').classList.add('vanish')
         Todo(data.filter(item => item.status === false))
-        console.log(data,323)
+
+        //隱藏編輯及完成按鈕
+        hideButton()
+        //在刪除按鈕前新增還原按鈕
+        const refNode = document.querySelectorAll('.deleteBtn')
+
+
+        const allBtn = document.querySelectorAll('.all-btn')
+       ;[...allBtn].forEach((item, i)=> {
+        const newBtn = document.createElement("button")
+        newBtn.addEventListener('click',(e)=>{
+          alert(313)
+        })
+        newBtn.innerHTML = "還原"
+        item.insertBefore(newBtn, refNode[i])
+      })
+
         break;
 
       case 2:
         document.querySelector('.table-wrapper-operation').classList.add('vanish')
-        Todo(data.filter(item => item.finish === true && item.status === true))
+        Todo(data.filter(item => item.finish === true))
+        const tr = document.querySelectorAll('.table-content')
+        tr.forEach(item => item.classList.add('finishLine'))
+        hideButton()
+
+        const refNodes = document.querySelectorAll('.deleteBtn')
+
+        const allBtns = document.querySelectorAll('.all-btn')
+        ;[...allBtns].forEach((item, i)=> {
+        const newBtn = document.createElement("button")
+        newBtn.addEventListener('click', (e) => {
+          alert(313)
+        })
+        newBtn.innerHTML = "取消"
+        item.insertBefore(newBtn, refNodes[i])
+      })
+
         break;
     }
-
-
 
   })
 
 
 
   let data = [];
-  let archive = [];
   let id = 1;
 ////新增
   document.getElementById('submit-btn').addEventListener('click', addData);
@@ -85,7 +121,7 @@ function formatDate(d){
           <td class="editName">${value.name}</td>
           <td>${formatDate(value.createTime)}</td>
           <td>${value.completeTime}</td>
-          <td>
+          <td class="all-btn">
           <button class="edit-btn">編輯</>
           <button class="complete-btn">完成</>
           <button class="deleteBtn">刪除</>
@@ -108,8 +144,17 @@ function formatDate(d){
       //完成
       tr.querySelector('.complete-btn').addEventListener('click',completeBtn)
       function completeBtn(){
-        tr.classList.add('finishLine')
-        data.map(item => item.finish = true)
+
+        const finish  = data.findIndex(item => {
+          return item.id === value.id
+        })
+        console.log(~finish)
+        if(~finish){
+          data.map(item=>{
+            item.finish = true
+          })
+          els.removeChild(tr)
+        }
       }
 
       //封存

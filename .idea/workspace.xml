@@ -3,19 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="9f529d55-ad57-442f-9974-b7a0ac5116ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.cache/0a/1370fb6f56c8ba7fce6693e76e1b80.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/0a/1370fb6f56c8ba7fce6693e76e1b80.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/88/79bca085f6e8c7e2ab0a1ac850096f.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/88/79bca085f6e8c7e2ab0a1ac850096f.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.cache/b7/e350564a088cb15e6ba404d6e6a4b9.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/b7/e350564a088cb15e6ba404d6e6a4b9.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/c8/4ce9d318e1e49c2fef48d656090907.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/c8/4ce9d318e1e49c2fef48d656090907.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/App.03fbd8d8.css" beforeDir="false" afterPath="$PROJECT_DIR$/dist/App.03fbd8d8.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/App.03fbd8d8.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/App.03fbd8d8.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/App.03fbd8d8.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/App.03fbd8d8.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/view.45cdd366.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/view.45cdd366.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/view.45cdd366.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/view.45cdd366.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,22 +68,35 @@
       <updated>1608601473639</updated>
       <workItem from="1608601474679" duration="20001000" />
       <workItem from="1608701357470" duration="16270000" />
-      <workItem from="1608773691011" duration="23022000" />
+      <workItem from="1608773691011" duration="23330000" />
+      <workItem from="1608859585569" duration="17894000" />
     </task>
+    <task id="LOCAL-00001" summary="3">
+      <created>1608804472932</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1608804472932</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="3" />
+    <option name="LAST_COMMIT_MESSAGE" value="3" />
   </component>
   <component name="WindowStateProjectService">
     <state x="682" y="305" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1608601517391">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="682" y="305" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608601517391" />
-    <state x="526" y="27" key="CommitChangelistDialog2" timestamp="1608796610350">
+    <state x="526" y="27" key="CommitChangelistDialog2" timestamp="1608804472502">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="526" y="27" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608796610350" />
+    <state x="526" y="27" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608804472502" />
     <state x="687" y="217" key="FileChooserDialogImpl" timestamp="1608713654156">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -111,5 +117,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1895" height="268" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608776777429" />
+    <state x="452" y="189" key="Vcs.Push.Dialog.v2" timestamp="1608804475840">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="452" y="189" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608804475840" />
   </component>
 </project>

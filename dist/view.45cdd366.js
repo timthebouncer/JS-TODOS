@@ -137,6 +137,17 @@ function formatDate(d) {
   return HH.padStart(2, '0') + ":" + mm.padStart(2, '0') + ":" + ss.padStart(2, '0');
 }
 
+function hideButton() {
+  var editBtn = document.querySelectorAll('.edit-btn');
+  editBtn.forEach(function (item) {
+    return item.classList.add('vanish');
+  });
+  var completeBtn = document.querySelectorAll('.complete-btn');
+  completeBtn.forEach(function (item) {
+    return item.classList.add('vanish');
+  });
+}
+
 ;
 
 (function () {
@@ -171,20 +182,50 @@ function formatDate(d) {
         document.querySelector('.table-wrapper-operation').classList.add('vanish');
         Todo(data.filter(function (item) {
           return item.status === false;
-        }));
-        console.log(data, 323);
+        })); //隱藏編輯及完成按鈕
+
+        hideButton(); //在刪除按鈕前新增還原按鈕
+
+        var refNode = document.querySelectorAll('.deleteBtn');
+        var allBtn = document.querySelectorAll('.all-btn');
+
+        _toConsumableArray(allBtn).forEach(function (item, i) {
+          var newBtn = document.createElement("button");
+          newBtn.addEventListener('click', function (e) {
+            alert(313);
+          });
+          newBtn.innerHTML = "還原";
+          item.insertBefore(newBtn, refNode[i]);
+        });
+
         break;
 
       case 2:
         document.querySelector('.table-wrapper-operation').classList.add('vanish');
         Todo(data.filter(function (item) {
-          return item.finish === true && item.status === true;
+          return item.finish === true;
         }));
+        var tr = document.querySelectorAll('.table-content');
+        tr.forEach(function (item) {
+          return item.classList.add('finishLine');
+        });
+        hideButton();
+        var refNodes = document.querySelectorAll('.deleteBtn');
+        var allBtns = document.querySelectorAll('.all-btn');
+
+        _toConsumableArray(allBtns).forEach(function (item, i) {
+          var newBtn = document.createElement("button");
+          newBtn.addEventListener('click', function (e) {
+            alert(313);
+          });
+          newBtn.innerHTML = "取消";
+          item.insertBefore(newBtn, refNodes[i]);
+        });
+
         break;
     }
   });
   var data = [];
-  var archive = [];
   var id = 1; ////新增
 
   document.getElementById('submit-btn').addEventListener('click', addData);
@@ -219,7 +260,7 @@ function formatDate(d) {
     data.forEach(function (value, index) {
       var tr = document.createElement('tr');
       tr.classList.add('table-content');
-      tr.innerHTML = "<td>".concat(value.id, "</td>\n          <td class=\"editName\">").concat(value.name, "</td>\n          <td>").concat(formatDate(value.createTime), "</td>\n          <td>").concat(value.completeTime, "</td>\n          <td>\n          <button class=\"edit-btn\">\u7DE8\u8F2F</>\n          <button class=\"complete-btn\">\u5B8C\u6210</>\n          <button class=\"deleteBtn\">\u522A\u9664</>\n          </td>"); //編輯
+      tr.innerHTML = "<td>".concat(value.id, "</td>\n          <td class=\"editName\">").concat(value.name, "</td>\n          <td>").concat(formatDate(value.createTime), "</td>\n          <td>").concat(value.completeTime, "</td>\n          <td class=\"all-btn\">\n          <button class=\"edit-btn\">\u7DE8\u8F2F</>\n          <button class=\"complete-btn\">\u5B8C\u6210</>\n          <button class=\"deleteBtn\">\u522A\u9664</>\n          </td>"); //編輯
 
       tr.querySelector('.edit-btn').addEventListener('click', editData);
 
@@ -240,10 +281,17 @@ function formatDate(d) {
       tr.querySelector('.complete-btn').addEventListener('click', completeBtn);
 
       function completeBtn() {
-        tr.classList.add('finishLine');
-        data.map(function (item) {
-          return item.finish = true;
+        var finish = data.findIndex(function (item) {
+          return item.id === value.id;
         });
+        console.log(~finish);
+
+        if (~finish) {
+          data.map(function (item) {
+            item.finish = true;
+          });
+          els.removeChild(tr);
+        }
       } //封存
 
 
@@ -379,7 +427,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54564" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56660" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
