@@ -44,7 +44,6 @@ function hideButton(){
         //在刪除按鈕前新增還原按鈕
         const refNode = document.querySelectorAll('.deleteBtn')
 
-
         const allBtn = document.querySelectorAll('.all-btn')
        ;[...allBtn].forEach((item, i)=> {
         const newBtn = document.createElement("button")
@@ -70,7 +69,18 @@ function hideButton(){
         ;[...allBtns].forEach((item, i)=> {
         const newBtn = document.createElement("button")
         newBtn.addEventListener('click', (e) => {
-          alert(313)
+
+         const cancel = data.findIndex((item,index)=> item.id === data[index].id)
+          console.log(cancel)
+
+            data[cancel].finish=false
+            document.querySelector('.table-content').remove()
+          // data.forEach((item,index)=> {
+          //   if(i === index){
+          //   console.log(item, i , index)
+          //   item.finish = false
+          // }
+          // })
         })
         newBtn.innerHTML = "取消"
         item.insertBefore(newBtn, refNodes[i])

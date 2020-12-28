@@ -216,7 +216,17 @@ function hideButton() {
         _toConsumableArray(allBtns).forEach(function (item, i) {
           var newBtn = document.createElement("button");
           newBtn.addEventListener('click', function (e) {
-            alert(313);
+            var cancel = data.findIndex(function (item, index) {
+              return item.id === data[index].id;
+            });
+            console.log(cancel);
+            data[cancel].finish = false;
+            document.querySelector('.table-content').remove(); // data.forEach((item,index)=> {
+            //   if(i === index){
+            //   console.log(item, i , index)
+            //   item.finish = false
+            // }
+            // })
           });
           newBtn.innerHTML = "取消";
           item.insertBefore(newBtn, refNodes[i]);
@@ -427,7 +437,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56660" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54514" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
